@@ -46,7 +46,7 @@ export async function authenticate(
     }
   }
 
-  
+
 export type State = {
     errors?: {
       customerId?: string[];
@@ -84,6 +84,7 @@ export type State = {
         VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
       `;
     } catch (error) {
+        console.error(error)
       // If a database error occurs, return a more specific error.
       return {
         message: 'Database Error: Failed to Create Invoice.',
@@ -123,6 +124,7 @@ export type State = {
       WHERE id = ${id}
     `;
   } catch (error) {
+    console.error(error)
     return { message: 'Database Error: Failed to Update Invoice.' };
   }
  
