@@ -9,9 +9,8 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Button } from "@/app/ui/button";
-import { updateInvoice, State } from '@/app/lib/actions';
-import { useActionState } from 'react';
-
+import { updateInvoice, State } from "@/app/lib/actions";
+import { useActionState } from "react";
 
 export default function EditInvoiceForm({
   invoice,
@@ -22,7 +21,7 @@ export default function EditInvoiceForm({
 }) {
   const initialState: State = { message: null, errors: {} };
   const updateInvoiceWithId = updateInvoice.bind(null, invoice.id);
-  const [_state, formAction] = useActionState(updateInvoiceWithId, initialState);
+  const [state, formAction] = useActionState(updateInvoiceWithId, initialState);
 
   return (
     <form action={formAction}>
@@ -125,6 +124,9 @@ export default function EditInvoiceForm({
         </Link>
         <Button type="submit">Edit Invoice</Button>
       </div>
+      {state.message && (
+        <p className="mt-2 text-sm text-red-500">{state.message}</p>
+      )}
     </form>
   );
 }
